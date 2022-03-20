@@ -1,0 +1,36 @@
+---
+- name: Adding users, their e-mails, homedirectory and password
+  hosts: nodes
+  become: yes
+  become_method: sudo
+  become_user: root
+   
+        
+
+  tasks: 
+  - name: Adding users
+    user: 
+      name: "{{ item.name }}"
+      comment: "{{ item.comment }}"
+      home: "{{ item.home}}"  
+      password: "{{ item.password | password_hash('sha512') }}"
+      state: present
+      createhome: yes
+     
+    loop:
+      - name: Alice
+        comment: Alice@example.com
+        home: /home/alice
+        password: "{{ password }}"  
+  
+      - name: Bob
+        comment: Bob@example.com
+        home: /home/bob
+        password: "{{ password }}"
+ 
+
+      - name: Carol
+        comment: Carol@example.com
+        home: /home/carol
+        password: "{{ password }}"
+           
