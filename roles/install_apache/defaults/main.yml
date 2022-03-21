@@ -1,0 +1,5 @@
+---
+# defaults file for my_role
+service: httpd
+inventory_name: "web server "
+node_ip: "{{ ansible_eth1.ipv4.address }}"
