@@ -1,0 +1,11 @@
+---
+# defaults file for install_vsftpd/
+service: vsftpd
+first_port: 20/tcp
+second_port: 21/tcp
+anonymous_enable: YES
+write_enable: YES
+anon_upload_enable: 'YES'
+anon_mkdir_write_enable: "YES"
+anon_root: /var/ftp/pub
+

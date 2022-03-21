@@ -1,0 +1,32 @@
+---
+# tasks file for install_vsftpd/
+- name: Install "{{ service }}"
+  yum:
+    name: "{{ service }}"
+    state: latest
+
+- name: Start and enable service
+  service:
+    name: "{{ service }}"
+    state: started
+    enabled: true
+
+- name: open port
+  firewalld:
+    port: "{{ item.port }}"
+    immediate: yes
+    permanent: yes
+    state: enabled
+
+  loop:
+  - port: "{{ first_port }}"
+  - port: "{{ second_port }}"
+
+- name: Create vsftpd.conf using Jinja2 
+  template:
+    src: vsftpd.j2
+    dest: /etc/vsftpd/vsftpd.conf
+  notify:
+    - restart_vsftpd
+
+

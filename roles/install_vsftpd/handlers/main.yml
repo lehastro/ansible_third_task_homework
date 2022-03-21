@@ -1,0 +1,6 @@
+---
+# handlers file for install_vsftpd/
+- name: restart_vsftpd
+  service:
+    name: "{{ service }}"
+    state: restarted
