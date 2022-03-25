@@ -1,6 +1,0 @@
----
-- name: Installing Apache
-  hosts: nodes
-  
-  roles: 
-    - role: install_apache
