@@ -10,23 +10,58 @@
     name: "{{ service }}"
     state: started
     enabled: true
+  
 
 - name: open port
   firewalld:
-    port: "{{ item.port }}"
+    service: ftp
     immediate: yes
     permanent: yes
     state: enabled
 
-  loop:
-  - port: "{{ first_port }}"
-  - port: "{{ second_port }}"
-
-- name: Create vsftpd.conf using Jinja2 
+- name: Install configuration file
   template:
-    src: vsftpd.j2
+    src: vsftpd.j2    
     dest: /etc/vsftpd/vsftpd.conf
+    mode: '0600'
   notify:
-    - restart_vsftpd
+    - restart_vsftpd 
+
+- name: Creating directory /var/ftp/pub
+  file: 
+    path: /var/ftp/pub
+    state: directory
+    mode: '0777'
+    owner: ftp
+
+- name: Creating directory /var/ftp/pub/upload
+  file:    
+    setype: "public_content_rw_t"
+    seuser: "system_u"
+    path: /var/ftp/pub/upload
+    recurse: yes
+    owner: ftp
+ 
 
 
+- name: Install libselinux
+  yum:
+    name: python3-libselinux
+    state: present
+
+- name: Install libmanage  
+  yum: 
+    name: python3-libsemanage 
+    state: present
+
+
+
+- name: set selinux boolean
+  seboolean:
+    name: ftpd_anon_write
+    state: yes
+    persistent: yes
+  tags: vsftp
+  notify:
+    - restorecon
+  

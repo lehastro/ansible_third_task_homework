@@ -3,5 +3,5 @@
   hosts: nodes
   user: ansible  
   roles: 
-#    - role: install_apache
+    - role: install_apache
     - role: install_vsftpd

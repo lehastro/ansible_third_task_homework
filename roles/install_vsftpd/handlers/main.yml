@@ -4,3 +4,6 @@
   service:
     name: "{{ service }}"
     state: restarted
+
+- name: run restorecon
+  command: restorecon -vR /var/ftp/pub

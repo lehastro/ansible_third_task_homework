@@ -27,19 +27,11 @@
   notify:
     - restart_httpd
 
-
-
-
 - name: open port
   firewalld:
-    port: "{{ item.port }}"
+    service: http
     immediate: yes
     permanent: yes
     state: enabled
-
-  loop:
-  - port: 80/tcp
-  - port: 22/tcp
-  - port: 111/tcp  
 
   
