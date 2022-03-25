@@ -1,0 +1,37 @@
+---
+# tasks file for my_role
+- name: Install "{{ service }}"
+  yum: 
+    name: "{{ service }}"
+    state: latest
+
+- name: Start and enable service
+  service:
+    name: "{{ service }}"
+    state: started
+    enabled: true
+
+- name: Checking "{{ service }}" service
+  shell: systemctl status "{{ service }}" 
+  register: results
+
+
+- debug:
+    var: results
+
+
+- name: Create index.html using Jinja2 
+  template:
+    src: index.j2
+    dest: /var/www/html/index.html
+  notify:
+    - restart_httpd
+
+- name: open port
+  firewalld:
+    service: http
+    immediate: yes
+    permanent: yes
+    state: enabled
+
+  

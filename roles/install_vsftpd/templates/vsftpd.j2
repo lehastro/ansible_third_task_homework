@@ -1,0 +1,17 @@
+local_enable={{ 'YES' if local_enable else 'NO' }}
+write_enable={{ 'YES' if write_enable else 'NO' }}
+dirmessage_enable={{ 'YES' if dirmessage_enable else 'NO' }}
+xferlog_enable={{ 'YES' if xferlog_enable else 'NO' }}
+connect_from_port_20={{ 'YES' if connect_from_port_20 else 'NO' }}
+xferlog_std_format={{ 'YES' if anonymous_enable else 'NO' }}
+ftpd_banner=Welcome to my FTP service.
+listen={{ 'YES' if listen else 'NO' }}
+listen_ipv6={{ 'YES' if listen_ipv6 else 'NO' }}
+pam_service_name={{ service }}
+anon_root={{ anon_root }}
+anonymous_enable={{ 'YES' if anonymous_enable else 'NO' }}
+write_enable={{ 'YES' if write_enable else 'NO' }}
+anon_upload_enable={{ 'YES' if anon_upload_enable else 'NO' }}
+anon_mkdir_write_enable={{ 'YES' if anon_mkdir_write_enable else 'NO' }}
+no_anon_password=YES
+

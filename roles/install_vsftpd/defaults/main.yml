@@ -1,0 +1,16 @@
+---
+# defaults file for install_vsftpd/
+service: vsftpd
+anonymous_enable: true
+anon_upload_enable: true
+anon_mkdir_write_enable: true
+anon_root: /var/ftp/pub
+local_enable: false
+write_enable: true
+dirmessage_enable: true
+xferlog_enable: true
+connect_from_port_20: true
+xferlog_std_format: true
+listen: true
+listen_ipv6: false
+
