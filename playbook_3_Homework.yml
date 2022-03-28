@@ -1,6 +1,6 @@
 ---
 - name: Installing Apache
-  hosts: nodes
+  hosts: node1.example.com, node2.example.com
   user: ansible  
   roles: 
     - role: install_apache
